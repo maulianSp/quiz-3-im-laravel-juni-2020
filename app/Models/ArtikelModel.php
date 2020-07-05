@@ -35,12 +35,14 @@ class ArtikelModel{
 
     //proses mengedit data artikel
     public static function update($id,$request){
+        $slug_result = str_slug($request['title'], "-");
         $update_data = DB::table('articles')
         ->where('id',$id)
         ->update(
             [
                 'title' => $request['title'],
                 'content' => $request['content'],
+                'slug' => $slug_result,
                 'updated_at' => now()
             ]
         );
